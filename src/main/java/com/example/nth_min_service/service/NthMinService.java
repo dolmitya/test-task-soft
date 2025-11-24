@@ -11,12 +11,11 @@ public class NthMinService {
     private final XlsxReader reader;
 
     public int findNth(String path, int n) {
-        var values = reader.read(path);
+        int[] values = reader.readUnique(path);
 
-        if (n < 1 || n > values.size()) {
+        if (n < 1 || n > values.length)
             throw new IllegalArgumentException("Некорректное N");
-        }
 
-        return Quickselect.select(values, 0, values.size() - 1, n - 1);
+        return Quickselect.select(values, n - 1);
     }
 }
